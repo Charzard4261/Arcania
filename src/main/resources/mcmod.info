@@ -1,0 +1,16 @@
+[
+{
+  "modid": "arcania",
+  "name": "Arcania",
+  "description": "An Ars Magica 2 inspired mod.",
+  "version": "0.1",
+  "mcversion": "1.12.2",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Charzard4261"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

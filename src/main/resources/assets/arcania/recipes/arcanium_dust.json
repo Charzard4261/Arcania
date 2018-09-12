@@ -1,0 +1,37 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        " P ",
+        "PLP",
+        "BPF"
+    ],
+    
+    "key":
+    {
+        "P":
+        {
+            "item": "arcania:arcanium_powder"
+        },
+        "L":
+        {
+            "item": "minecraft:dye",
+            "data": 4
+        },
+        "B":
+        {
+            "item": "minecraft:bowl"
+        },
+        "F":
+        {
+            "item": "minecraft:flint"
+        }
+    },
+    
+    "result":
+    {
+        "item": "arcania:arcanium_dust",
+        "count": 1
+    }
+}

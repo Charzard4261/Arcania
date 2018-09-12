@@ -1,0 +1,22 @@
+{ 
+    "type": "minecraft:crafting_shapeless",
+
+    "ingredients": 
+    [
+
+    {
+      "item": "arcania:arcanium_powder"
+    },
+
+    {
+      "item": "minecraft:writable_book"
+    }
+    
+    ],
+
+    "result": 
+    {
+        "item": "arcania:arcanium_book",
+        "count": 1
+    }
+}

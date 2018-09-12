@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "variant=oak": {"model" : "arcania:pedestal_oak"},
+        "variant=spruce": {"model" : "arcania:pedestal_spruce"},
+        "variant=birch": {"model" : "arcania:pedestal_birch"},
+        "variant=jungle": {"model" : "arcania:pedestal_jungle"},
+        "variant=acacia": {"model" : "arcania:pedestal_acacia"},
+        "variant=darkoak": {"model" : "arcania:pedestal_darkoak"}
+    }
+}

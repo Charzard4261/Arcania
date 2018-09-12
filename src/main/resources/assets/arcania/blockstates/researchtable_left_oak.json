@@ -1,0 +1,23 @@
+{
+    "variants": {
+       // "facing=north": {
+       //     "model" : "arcania:researchtable_left_oak",
+       //     "y" : 270
+       // },
+       // "facing=east": {
+       //     "model" : "arcania:researchtable_left_oak",
+       //     "y" : 0
+       // },
+       // "facing=south": {
+       //     "model" : "arcania:researchtable_left_oak",
+       //     "y" : 90
+       // },
+       // "facing=west": {
+       //     "model" : "arcania:researchtable_left_oak",
+       //     "y" : 180
+       // }
+       "normal": {
+            "model" : "arcania:researchtable_left_oak"
+        }
+    }
+}

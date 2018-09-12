@@ -1,0 +1,13 @@
+itemGroup.arcaniatab=Arcania
+
+item.arcanium_book.name=Arcanium Book
+item.arcanium_dust.name=Arcanium Dust
+item.arcanium_powder.name=Arcanium Powder
+
+tile.arcanium_ore.name=Arcanium Ore
+tile.pedestal_oak.name=Oak Pedestal
+tile.pedestal_spruce.name=Spruce Pedestal
+tile.pedestal_birch.name=Birch Pedestal
+tile.pedestal_jungle.name=Jungle Pedestal
+tile.pedestal_acacia.name=Acacia Pedestal
+tile.pedestal_darkoak.name=Dark Oak Pedestal

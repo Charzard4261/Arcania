@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "normal": {
+            "model" : "arcania:arcanium_ore"
+        }
+    }
+}
