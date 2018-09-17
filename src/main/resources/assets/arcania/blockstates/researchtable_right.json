@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north,variant=oak": {"model" : "arcania:researchtable_right_oak", "y" : 90},
+        "facing=east,variant=oak": {"model" : "arcania:researchtable_right_oak", "y" : 180},
+        "facing=south,variant=oak": {"model" : "arcania:researchtable_right_oak", "y" : 270},
+        "facing=west,variant=oak": {"model" : "arcania:researchtable_right_oak", "y" : 0}
+    }
+}

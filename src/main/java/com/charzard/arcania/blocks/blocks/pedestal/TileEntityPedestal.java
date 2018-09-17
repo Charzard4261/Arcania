@@ -1,6 +1,8 @@
 package com.charzard.arcania.blocks.blocks.pedestal;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -78,4 +80,34 @@ public class TileEntityPedestal extends TileEntity {
 		return aabb;
 	}
 
+
+	@Override
+	public NBTTagCompound getUpdateTag()
+	{
+		NBTTagCompound compound = super.getUpdateTag();
+
+		compound.setTag("inventory", inventory.serializeNBT());
+
+		return compound;
+	}
+
+	@Override
+	public void handleUpdateTag(NBTTagCompound tag)
+	{
+		readFromNBT(tag);
+	}
+
+	@Override
+	public SPacketUpdateTileEntity getUpdatePacket()
+	{
+		return new SPacketUpdateTileEntity(this.getPos(), 0, this.writeToNBT(new NBTTagCompound()));
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)
+	{
+		handleUpdateTag(pkt.getNbtCompound());
+	}
+	
+	
 }

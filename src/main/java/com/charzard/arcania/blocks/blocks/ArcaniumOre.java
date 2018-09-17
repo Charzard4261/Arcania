@@ -14,7 +14,7 @@ public class ArcaniumOre extends BlockBase {
 
 	public ArcaniumOre()
 	{
-		super("arcanium_ore", Material.ROCK);
+		super("arcanium_ore", Material.ROCK, false);
 		setHardness(3);
 		setResistance(15);
 		setHarvestLevel("pickaxe", 2);

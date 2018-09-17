@@ -8,16 +8,21 @@ import net.minecraft.block.material.Material;
 
 public abstract class BlockWithVariantsBase extends Block implements IHasModel {
 
-	public BlockWithVariantsBase(String name, Material material)
+	private boolean noItem = false;
+
+	public BlockWithVariantsBase(String name, Material material, boolean noItem)
 	{
 		super(material);
+
+		this.noItem = noItem;
 
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(ModItems.arcaniaTab);
 
 		ModBlocks.BLOCKS.add(this);
-		ModItems.ITEMS.add(new ItemBlockWithVariants(this));
+		if (!noItem)
+			ModItems.ITEMS.add(new ItemBlockWithVariants(this));
 	}
 
 	@Override

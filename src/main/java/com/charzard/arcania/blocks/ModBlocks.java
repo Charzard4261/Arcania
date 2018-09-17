@@ -6,6 +6,7 @@ import java.util.List;
 import com.charzard.arcania.blocks.blocks.ArcaniumOre;
 import com.charzard.arcania.blocks.blocks.pedestal.Pedestal;
 import com.charzard.arcania.blocks.blocks.researchtable.ResearchTableLeft;
+import com.charzard.arcania.blocks.blocks.researchtable.ResearchTableRight;
 
 import net.minecraft.block.Block;
 
@@ -16,5 +17,6 @@ public class ModBlocks {
 	public static final Block ARCANIUM_ORE = new ArcaniumOre();
 	public static final Block PEDESTAL = new Pedestal();
 	public static final Block RESEARCHTABLE_LEFT = new ResearchTableLeft();
+	public static final Block RESEARCHTABLE_RIGHT = new ResearchTableRight();
 	
 }

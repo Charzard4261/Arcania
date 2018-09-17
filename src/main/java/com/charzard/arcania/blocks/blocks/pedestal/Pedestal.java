@@ -35,7 +35,7 @@ public class Pedestal extends BlockWithVariantsBase implements IMetaName, ITileE
 
 	public Pedestal()
 	{
-		super("pedestal", Material.WOOD);
+		super("pedestal", Material.WOOD, false);
 		setHardness(2);
 		setResistance(10);
 		setHarvestLevel("axe", 0);

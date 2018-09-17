@@ -2,6 +2,7 @@ package com.charzard.arcania;
 
 import com.charzard.arcania.blocks.blocks.pedestal.TileEntityPedestal;
 import com.charzard.arcania.blocks.blocks.researchtable.TileEntityResearchTableLeft;
+import com.charzard.arcania.blocks.blocks.researchtable.TileEntityResearchTableRight;
 import com.charzard.arcania.proxy.CommonProxy;
 import com.charzard.arcania.util.Reference;
 import com.charzard.arcania.world.ModWorldGen;
@@ -30,6 +31,7 @@ public class Main {
 		GameRegistry.registerWorldGenerator(new ModWorldGen(), 3);
 		GameRegistry.registerTileEntity(TileEntityPedestal.class, "arcania:pedestal");
 		GameRegistry.registerTileEntity(TileEntityResearchTableLeft.class, "arcania:researchtable_left");
+		GameRegistry.registerTileEntity(TileEntityResearchTableRight.class, "arcania:researchtable_right");
 
 		proxy.preInit();
 	}

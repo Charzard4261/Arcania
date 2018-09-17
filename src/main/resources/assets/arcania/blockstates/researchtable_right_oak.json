@@ -1,7 +1,7 @@
 {
     "variants": {
        "normal": {
-            "model" : "arcania:researchtable_left_oak"
+            "model" : "arcania:researchtable_right_oak"
         }
     }
 }

@@ -10,9 +10,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 
-public class TileEntityResearchTableLeft extends TileEntity {
+public class TileEntityResearchTableRight extends TileEntity {
 
 	EnumFacing facing = EnumFacing.NORTH;
+	boolean drop = true;
 
 	public void setFacing(EnumFacing facing)
 	{
@@ -23,15 +24,12 @@ public class TileEntityResearchTableLeft extends TileEntity {
 	public void readFromNBT(NBTTagCompound compound)
 	{
 		super.readFromNBT(compound);
-		// inventory.deserializeNBT(compound.getCompoundTag("inventory"));
 		facing = EnumFacing.byName(compound.getString("facing"));
 	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
-		// compound.setTag("inventory", inventory.serializeNBT());
-
 		compound.setString("facing", facing.name());
 		return super.writeToNBT(compound);
 	}
@@ -39,15 +37,13 @@ public class TileEntityResearchTableLeft extends TileEntity {
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing)
 	{
-		return /* capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || */super.hasCapability(capability, facing);
+		return super.hasCapability(capability, facing);
 	}
 
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
 	{
-		return /*
-				 * capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (T) inventory :
-				 */super.getCapability(capability, facing);
+		return super.getCapability(capability, facing);
 	}
 
 	@Override
@@ -77,5 +73,4 @@ public class TileEntityResearchTableLeft extends TileEntity {
 	{
 		handleUpdateTag(pkt.getNbtCompound());
 	}
-
 }
