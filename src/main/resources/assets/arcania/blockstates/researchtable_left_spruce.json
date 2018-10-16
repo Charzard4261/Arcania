@@ -1,0 +1,7 @@
+{
+    "variants": {
+       "normal": {
+            "model" : "arcania:researchtable_left_spruce"
+        }
+    }
+}

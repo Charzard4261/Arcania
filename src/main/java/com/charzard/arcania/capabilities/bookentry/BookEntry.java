@@ -59,14 +59,12 @@ public class BookEntry implements IBookEntry {
 		NBTTagCompound nbt = new NBTTagCompound();
 		for (Entry<String, Integer> entry : entries.entrySet())
 			nbt.setInteger(entry.getKey(), entry.getValue());
-		// System.out.println("SAVED TO " + nbt);
 		return nbt;
 	}
 
 	@Override
 	public void load(NBTTagCompound nbt)
 	{
-		// System.out.println("BOOK ENTRY LOADING " + nbt);
 		for (String name : entries.keySet())
 			entries.replace(name, nbt.getInteger(name));
 	}

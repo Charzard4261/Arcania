@@ -1,6 +1,6 @@
 package com.charzard.arcania.util.handelers;
 
-import com.charzard.arcania.capabilities.ManaProvider;
+import com.charzard.arcania.capabilities.arcana.ArcanaProvider;
 import com.charzard.arcania.capabilities.bookentry.BookEntryProvider;
 import com.charzard.arcania.util.Reference;
 
@@ -14,14 +14,14 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @EventBusSubscriber
 public class CapabilityHandler {
 	public static final ResourceLocation ENTRIES = new ResourceLocation(Reference.MOD_ID, "IBookEntry");
-    public static final ResourceLocation MANA_CAP = new ResourceLocation(Reference.MOD_ID, "mana");
+    public static final ResourceLocation ARCANA_CAP = new ResourceLocation(Reference.MOD_ID, "IArcana");
 
 	@SubscribeEvent
 	public void attachCapability(AttachCapabilitiesEvent<Entity> event)
 	{
 		if (!(event.getObject() instanceof EntityPlayer))
 			return;
-        event.addCapability(MANA_CAP, new ManaProvider());
+        event.addCapability(ARCANA_CAP, new ArcanaProvider());
 		event.addCapability(ENTRIES, new BookEntryProvider());
 	}
 }

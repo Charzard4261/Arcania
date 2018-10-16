@@ -3,6 +3,26 @@
         "facing=north,variant=oak": {"model" : "arcania:researchtable_right_oak"},
         "facing=east,variant=oak": {"model" : "arcania:researchtable_right_oak"},
         "facing=south,variant=oak": {"model" : "arcania:researchtable_right_oak"},
-        "facing=west,variant=oak": {"model" : "arcania:researchtable_right_oak"}
+        "facing=west,variant=oak": {"model" : "arcania:researchtable_right_oak"},
+        "facing=north,variant=spruce": {"model" : "arcania:researchtable_right_spruce"},
+        "facing=east,variant=spruce": {"model" : "arcania:researchtable_right_spruce"},
+        "facing=south,variant=spruce": {"model" : "arcania:researchtable_right_spruce"},
+        "facing=west,variant=spruce": {"model" : "arcania:researchtable_right_spruce"},
+        "facing=north,variant=birch": {"model" : "arcania:researchtable_right_birch"},
+        "facing=east,variant=birch": {"model" : "arcania:researchtable_right_birch"},
+        "facing=south,variant=birch": {"model" : "arcania:researchtable_right_birch"},
+        "facing=west,variant=birch": {"model" : "arcania:researchtable_right_birch"},
+        "facing=north,variant=jungle": {"model" : "arcania:researchtable_right_jungle"},
+        "facing=east,variant=jungle": {"model" : "arcania:researchtable_right_jungle"},
+        "facing=south,variant=jungle": {"model" : "arcania:researchtable_right_jungle"},
+        "facing=west,variant=jungle": {"model" : "arcania:researchtable_right_jungle"},
+        "facing=north,variant=acacia": {"model" : "arcania:researchtable_right_acacia"},
+        "facing=east,variant=acacia": {"model" : "arcania:researchtable_right_acacia"},
+        "facing=south,variant=acacia": {"model" : "arcania:researchtable_right_acacia"},
+        "facing=west,variant=acacia": {"model" : "arcania:researchtable_right_acacia"},
+        "facing=north,variant=darkoak": {"model" : "arcania:researchtable_right_darkoak"},
+        "facing=east,variant=darkoak": {"model" : "arcania:researchtable_right_darkoak"},
+        "facing=south,variant=darkoak": {"model" : "arcania:researchtable_right_darkoak"},
+        "facing=west,variant=darkoak": {"model" : "arcania:researchtable_right_darkoak"}
     }
 }
