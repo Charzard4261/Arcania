@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import com.charzard.arcania.capabilities.bookentry.BookEntryProvider;
 import com.charzard.arcania.client.gui.arcaniumbook.ArcaniumBookGUI;
-import com.charzard.arcania.client.gui.arcaniumbook.Page;
 import com.charzard.arcania.items.ModItems;
 
 import net.minecraft.client.Minecraft;

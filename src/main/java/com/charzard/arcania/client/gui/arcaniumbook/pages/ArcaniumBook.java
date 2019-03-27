@@ -3,7 +3,6 @@ package com.charzard.arcania.client.gui.arcaniumbook.pages;
 import java.io.IOException;
 
 import com.charzard.arcania.client.gui.arcaniumbook.ArcaniumBookGUI;
-import com.charzard.arcania.client.gui.arcaniumbook.Page;
 import com.charzard.arcania.items.ModItems;
 
 import net.minecraft.client.gui.GuiButton;
@@ -39,9 +38,9 @@ public class ArcaniumBook extends Page {
 		gui.getFontRenderer().drawString("previous entries.", leftX, lineOneY + lineOffsetY * 5, 0x000000, false);
 		gui.getFontRenderer().drawString("", leftX, lineOneY + lineOffsetY * 6, 0x000000, false);
 		gui.getFontRenderer().drawString("This should prove", leftX, lineOneY + lineOffsetY * 7, 0x000000, false);
-		gui.getFontRenderer().drawString("itself to be useful in", leftX, lineOneY + lineOffsetY * 8, 0x000000, false);
-		gui.getFontRenderer().drawString("aiding my research.", leftX, lineOneY + lineOffsetY * 9, 0x000000, false);
-		gui.getFontRenderer().drawString("", leftX, lineOneY + lineOffsetY * 10, 0x000000, false);
+		gui.getFontRenderer().drawString("itself to be useful", leftX, lineOneY + lineOffsetY * 8, 0x000000, false);
+		gui.getFontRenderer().drawString("when I need to update", leftX, lineOneY + lineOffsetY * 9, 0x000000, false);
+		gui.getFontRenderer().drawString("my previous research.", leftX, lineOneY + lineOffsetY * 10, 0x000000, false);
 		gui.getFontRenderer().drawString("", leftX, lineOneY + lineOffsetY * 11, 0x000000, false);
 		gui.getFontRenderer().drawString("", leftX, lineOneY + lineOffsetY * 12, 0x000000, false);
 		gui.getFontRenderer().drawString("", leftX, lineOneY + lineOffsetY * 13, 0x000000, false);

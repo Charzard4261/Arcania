@@ -1,7 +1,6 @@
 package com.charzard.arcania.client.gui.arcaniumbook.pages;
 
 import com.charzard.arcania.client.gui.arcaniumbook.ArcaniumBookGUI;
-import com.charzard.arcania.client.gui.arcaniumbook.Page;
 import com.charzard.arcania.util.buttons.GuiButtonItemRender;
 
 import net.minecraft.client.gui.GuiButton;

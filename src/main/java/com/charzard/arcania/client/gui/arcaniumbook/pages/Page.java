@@ -1,8 +1,8 @@
-package com.charzard.arcania.client.gui.arcaniumbook;
+package com.charzard.arcania.client.gui.arcaniumbook.pages;
 
 import java.util.List;
 
-import com.charzard.arcania.client.gui.arcaniumbook.pages.Index;
+import com.charzard.arcania.client.gui.arcaniumbook.ArcaniumBookGUI;
 import com.charzard.arcania.util.Reference;
 import com.charzard.arcania.util.buttons.GuiButtonTextured;
 
@@ -12,8 +12,8 @@ import net.minecraft.util.ResourceLocation;
 public abstract class Page {
 
 	public ArcaniumBookGUI gui;
-	public final ResourceLocation texture_1 = new ResourceLocation(Reference.MOD_ID, "textures/gui/arcanium_book_1.png");
-	public final ResourceLocation texture_2 = new ResourceLocation(Reference.MOD_ID, "textures/gui/arcanium_book_2.png");
+	public final ResourceLocation texture_1 = new ResourceLocation(Reference.MOD_ID, "textures/gui/arcaniumbook/arcanium_book_1.png");
+	public final ResourceLocation texture_2 = new ResourceLocation(Reference.MOD_ID, "textures/gui/arcaniumbook/arcanium_book_2.png");
 	public GuiButton forwards, backwards, home;
 	public int leftX, rightX, leftTitleX, rightTitleX, titleY, lineOneY, lineOffsetY;
 
@@ -31,12 +31,12 @@ public abstract class Page {
 
 		gui.getButtonList().clear();
 
-		home = new GuiButtonTextured(100, centerX + 102, centerY + 65, new ResourceLocation(Reference.MOD_ID, "textures/gui/arcanium_book_1.png"), 3,
+		home = new GuiButtonTextured(100, centerX + 102, centerY + 65, new ResourceLocation(Reference.MOD_ID, "textures/gui/arcaniumbook/arcanium_book_1.png"), 3,
 				220, 18, 10, 26, 220);
-		forwards = new GuiButtonTextured(101, centerX + 102, centerY + 65, new ResourceLocation(Reference.MOD_ID, "textures/gui/arcanium_book_1.png"),
+		forwards = new GuiButtonTextured(101, centerX + 102, centerY + 65, new ResourceLocation(Reference.MOD_ID, "textures/gui/arcaniumbook/arcanium_book_1.png"),
 				3, 194, 18, 10, 26, 194);
 		backwards = new GuiButtonTextured(102, centerX - 121, centerY + 65,
-				new ResourceLocation(Reference.MOD_ID, "textures/gui/arcanium_book_1.png"), 3, 207, 18, 10, 26, 207);
+				new ResourceLocation(Reference.MOD_ID, "textures/gui/arcaniumbook/arcanium_book_1.png"), 3, 207, 18, 10, 26, 207);
 
 		leftX = centerX - 130;
 		rightX = centerX + 15;

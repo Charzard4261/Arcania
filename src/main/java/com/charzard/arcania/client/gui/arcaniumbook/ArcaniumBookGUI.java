@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.charzard.arcania.client.gui.arcaniumbook.pages.Index;
+import com.charzard.arcania.client.gui.arcaniumbook.pages.Page;
 import com.charzard.arcania.network.PacketGetEntries;
 import com.charzard.arcania.network.PacketHandler;
 import com.charzard.arcania.util.Reference;
@@ -16,14 +17,14 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
 
 public class ArcaniumBookGUI extends GuiScreen {
-
-	final ResourceLocation texture_1 = new ResourceLocation(Reference.MOD_ID, "textures/gui/arcanium_book_1.png");
-	final ResourceLocation texture_2 = new ResourceLocation(Reference.MOD_ID, "textures/gui/arcanium_book_2.png");
+	// TODO split image into only book and icon sheet, possibly enabled and disabled sheets
+	final ResourceLocation	bookLeftAndIcons	= new ResourceLocation(Reference.MOD_ID, "textures/gui/arcaniumbook/arcanium_book_1.png");
+	final ResourceLocation	bookRight			= new ResourceLocation(Reference.MOD_ID, "textures/gui/arcaniumbook/arcanium_book_2.png");
 
 	/** Width and height of the left page */
-	int lwidth = 146, lheight = 180;
+	int	lwidth	= 146, lheight = 180;
 	/** Width and height of the right page */
-	int rwidth = 145, rheight = 180;
+	int	rwidth	= 145, rheight = 180;
 
 	public Page page = new Index(this);
 
@@ -45,9 +46,9 @@ public class ArcaniumBookGUI extends GuiScreen {
 	{
 		int centerX = width / 2, centerY = height / 2;
 
-		mc.renderEngine.bindTexture(texture_2);
+		mc.renderEngine.bindTexture(bookRight);
 		drawTexturedModalRect(centerX, centerY - (rheight / 2), 0, 0, rwidth, rheight);
-		mc.renderEngine.bindTexture(texture_1);
+		mc.renderEngine.bindTexture(bookLeftAndIcons);
 		drawTexturedModalRect(centerX - lwidth, centerY - (lheight / 2), 0, 0, lwidth, lheight);
 
 		page.drawScreen(mouseX, mouseY, partialTicks);

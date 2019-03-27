@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.charzard.arcania.capabilities.bookentry.BookEntryProvider;
 import com.charzard.arcania.client.gui.arcaniumbook.ArcaniumBookGUI;
-import com.charzard.arcania.client.gui.arcaniumbook.Page;
 import com.charzard.arcania.items.ModItems;
 import com.charzard.arcania.util.buttons.GuiButtonItemRender;
 

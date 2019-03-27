@@ -15,6 +15,13 @@ public interface IBookEntry {
 	 * @return
 	 */
 	boolean hasEntry(String name);
+	
+	/**
+	 * Gets the stage of an entry
+	 * @param name The name of the entry (lower case, words separated by underscores)
+	 * @return The stage as an integer (0 being not unlocked)
+	 */
+	int getEntryStage(String name);
 
 	/**
 	 * Unlocks an entry

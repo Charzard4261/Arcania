@@ -1,23 +1,25 @@
 package com.charzard.arcania.blocks.blocks.researchtable;
 
+import java.util.List;
 import java.util.Random;
 
 import com.charzard.arcania.Main;
 import com.charzard.arcania.blocks.BlockWithVariantsBase;
 import com.charzard.arcania.blocks.ModBlocks;
-import com.charzard.arcania.blocks.blocks.pedestal.Pedestal;
+import com.charzard.arcania.client.gui.researchtable.ResearchTableGUI;
 import com.charzard.arcania.util.IMetaName;
 
-import net.minecraft.block.BlockDoor;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -26,10 +28,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
@@ -37,10 +38,8 @@ import net.minecraft.world.World;
 
 public class ResearchTableRight extends BlockWithVariantsBase implements IMetaName, ITileEntityProvider {
 
-	public static final PropertyEnum<ResearchTableRight.EnumType> VARIANT = PropertyEnum.<ResearchTableRight.EnumType>create("variant",
-			ResearchTableRight.EnumType.class);
-	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
-	public EnumFacing facing = EnumFacing.NORTH;
+	public static final PropertyEnum<ResearchTableRight.EnumType>	VARIANT	= PropertyEnum.<ResearchTableRight.EnumType>create("variant", ResearchTableRight.EnumType.class);
+	public static final PropertyDirection							FACING	= PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
 	public ResearchTableRight()
 	{
@@ -50,8 +49,7 @@ public class ResearchTableRight extends BlockWithVariantsBase implements IMetaNa
 		setHarvestLevel("axe", 0);
 		setSoundType(SoundType.WOOD);
 
-		this.setDefaultState(
-				this.blockState.getBaseState().withProperty(VARIANT, ResearchTableRight.EnumType.OAK).withProperty(FACING, EnumFacing.NORTH));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, ResearchTableRight.EnumType.OAK).withProperty(FACING, EnumFacing.NORTH));
 	}
 
 	@Override
@@ -87,10 +85,10 @@ public class ResearchTableRight extends BlockWithVariantsBase implements IMetaNa
 		if (te == null || te.facing == null)
 			return state.withProperty(FACING, EnumFacing.NORTH);
 
-		if (facing != te.facing)
-			facing = te.facing;
+		if (state.getValue(FACING) != te.facing)
+			state = state.withProperty(FACING, te.facing);
 
-		return state.withProperty(FACING, te.facing);
+		return state;
 	}
 
 	@Override
@@ -113,11 +111,11 @@ public class ResearchTableRight extends BlockWithVariantsBase implements IMetaNa
 	}
 
 	public static enum EnumType implements IStringSerializable {
-		OAK(0, "oak"), SPRUCE(1, "spruce"), BIRCH(2, "birch"), JUNGLE(3, "jungle"), ACACIA(4, "acacia"), DARKOAK(5, "darkoak");
+		OAK(0, "oak"), SPRUCE(1, "spruce"), BIRCH(2, "birch"), JUNGLE(3, "jungle"), ACACIA(4, "acacia"), DARKOAK(5, "big_oak");
 
-		private static final ResearchTableRight.EnumType[] META_LOOKUP = new ResearchTableRight.EnumType[values().length];
-		private final int meta;
-		private final String name, unlocalizedName;
+		private static final ResearchTableRight.EnumType[]	META_LOOKUP	= new ResearchTableRight.EnumType[values().length];
+		private final int									meta;
+		private final String								name, unlocalizedName;
 
 		private EnumType(int meta, String name)
 		{
@@ -192,6 +190,48 @@ public class ResearchTableRight extends BlockWithVariantsBase implements IMetaNa
 		return false;
 	}
 
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	{
+		return new AxisAlignedBB(0.0, 0.5625, 0.0, 1, 1, 0.9375);
+	}
+
+	@Override
+	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, Entity entityIn, boolean isActualState)
+	{
+		switch (state.getValue(FACING)) // FACING is actually the opposite
+		{
+			case NORTH:
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.0, 0.75, 0.0625, 1, 1, 1));
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.125, 0.6875, 0.25, 0.875, 0.75, 1));
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.1875, 0.625, 0.25, 0.8125, 0.6875, 1));
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.25, 0.5625, 0.3125, 0.75, 0.625, 1));
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.25, 0.0, 0.0625, 0.75, 1, 0.3125));
+				break;
+			case EAST:
+				break;
+			case SOUTH:
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.0, 0.75, 0.0, 1, 1, 0.9375)); // Top
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.125, 0.6875, 0.0, 0.875, 0.75, 0.75)); // T
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.1875, 0.625, 0.0, 0.8125, 0.6875, 0.75)); // M
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.25, 0.5625, 0.0, 0.75, 0.625, 0.6875)); // B
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.25, 0, 0.6875, 0.75, 0.75, 0.9375)); // Leg
+				break;
+			case WEST:
+				break;
+			default:
+				break;
+		}
+	}
+
+	@Override
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+	{
+		if (face == EnumFacing.UP)
+			return BlockFaceShape.SOLID;
+
+		return BlockFaceShape.UNDEFINED;
+	}
+
 	@Override
 	public boolean canCreatureSpawn(IBlockState state, IBlockAccess world, BlockPos pos, net.minecraft.entity.EntityLiving.SpawnPlacementType type)
 	{
@@ -201,7 +241,19 @@ public class ResearchTableRight extends BlockWithVariantsBase implements IMetaNa
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
-		((TileEntityResearchTableRight) worldIn.getTileEntity(pos)).setFacing(facing);
+		((TileEntityResearchTableRight) worldIn.getTileEntity(pos)).setFacing(state.getValue(FACING));
+	}
+
+	@Override
+	public void breakBlock(World world, BlockPos pos, IBlockState state)
+	{
+		TileEntityResearchTableRight te = (TileEntityResearchTableRight) world.getTileEntity(pos);
+		BlockPos leftpos = pos.add(te.facing.getDirectionVec());
+
+		if (world.getBlockState(leftpos).getBlock() instanceof ResearchTableLeft)
+			world.destroyBlock(leftpos, te.drop);
+
+		super.breakBlock(world, pos, state);
 	}
 
 	@Override
@@ -216,16 +268,18 @@ public class ResearchTableRight extends BlockWithVariantsBase implements IMetaNa
 	}
 
 	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state)
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		TileEntityResearchTableRight te = (TileEntityResearchTableRight) world.getTileEntity(pos);
-
-		BlockPos leftpos = pos.add(facing.getDirectionVec());
-
-		if (world.getBlockState(leftpos).getBlock() instanceof ResearchTableLeft)
-			world.destroyBlock(leftpos, te.drop);
-
-		super.breakBlock(world, pos, state);
+		// TileEntityResearchTableRight te = (TileEntityResearchTableRight)
+		// world.getTileEntity(pos);
+		//
+		// if (te != null)
+		// {
+		// Minecraft.getMinecraft().displayGuiScreen(new
+		// ResearchTableGUI(state.getValue(VARIANT).name));
+		// return true;
+		// }
+		return false;
 	}
 
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)

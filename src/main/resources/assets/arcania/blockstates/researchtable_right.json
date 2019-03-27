@@ -20,9 +20,9 @@
         "facing=east,variant=acacia": {"model" : "arcania:researchtable_right_acacia", "y" : 180},
         "facing=south,variant=acacia": {"model" : "arcania:researchtable_right_acacia", "y" : 270},
         "facing=west,variant=acacia": {"model" : "arcania:researchtable_right_acacia", "y" : 0},
-        "facing=north,variant=darkoak": {"model" : "arcania:researchtable_right_darkoak", "y" : 90},
-        "facing=east,variant=darkoak": {"model" : "arcania:researchtable_right_darkoak", "y" : 180},
-        "facing=south,variant=darkoak": {"model" : "arcania:researchtable_right_darkoak", "y" : 270},
-        "facing=west,variant=darkoak": {"model" : "arcania:researchtable_right_darkoak", "y" : 0}
+        "facing=north,variant=big_oak": {"model" : "arcania:researchtable_right_big_oak", "y" : 90},
+        "facing=east,variant=big_oak": {"model" : "arcania:researchtable_right_big_oak", "y" : 180},
+        "facing=south,variant=big_oak": {"model" : "arcania:researchtable_right_big_oak", "y" : 270},
+        "facing=west,variant=big_oak": {"model" : "arcania:researchtable_right_big_oak", "y" : 0}
     }
 }

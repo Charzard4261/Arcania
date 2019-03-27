@@ -30,6 +30,12 @@ public class BookEntry implements IBookEntry {
 	}
 
 	@Override
+	public int getEntryStage(String name)
+	{
+		return entries.get(name);
+	}
+
+	@Override
 	public void unlockEntry(String name)
 	{
 		if (!entries.containsKey(name))

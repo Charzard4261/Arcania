@@ -7,6 +7,7 @@ import com.charzard.arcania.proxy.CommonProxy;
 import com.charzard.arcania.util.Reference;
 import com.charzard.arcania.world.ModWorldGen;
 
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -28,6 +29,7 @@ public class Main {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
+		// if (Minecraft.IS_RUNNING_ON_MAC) TODO disable because I don't like Macs
 		GameRegistry.registerWorldGenerator(new ModWorldGen(), 3);
 		GameRegistry.registerTileEntity(TileEntityPedestal.class, "arcania:pedestal");
 		GameRegistry.registerTileEntity(TileEntityResearchTableLeft.class, "arcania:researchtable_left");
