@@ -1,6 +1,6 @@
 package com.charzard.arcania.items.tools;
 
-import com.charzard.arcania.Main;
+import com.charzard.arcania.Arcania;
 import com.charzard.arcania.items.ModItems;
 import com.charzard.arcania.util.IHasModel;
 
@@ -22,7 +22,7 @@ public class ToolPickaxe extends ItemPickaxe implements IHasModel {
 	@Override
 	public void registerModels()
 	{
-		Main.proxy.registerItemRenderer(this, 0, "inventory");
+		Arcania.proxy.registerItemRenderer(this, 0, "inventory");
 	}
 	
 }

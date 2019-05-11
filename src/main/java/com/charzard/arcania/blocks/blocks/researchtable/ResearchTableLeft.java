@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import com.charzard.arcania.Main;
+import com.charzard.arcania.Arcania;
 import com.charzard.arcania.blocks.BlockWithVariantsBase;
 import com.charzard.arcania.blocks.ModBlocks;
+import com.charzard.arcania.blocks.blocks.pedestal.TileEntityPedestal;
+import com.charzard.arcania.client.gui.GUIHandler;
 import com.charzard.arcania.client.gui.researchtable.ResearchTableGUI;
 import com.charzard.arcania.util.IMetaName;
 import com.google.common.collect.Lists;
@@ -25,7 +27,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -40,6 +44,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.items.CapabilityItemHandler;
 
 public class ResearchTableLeft extends BlockWithVariantsBase implements IMetaName, ITileEntityProvider {
 
@@ -52,7 +57,6 @@ public class ResearchTableLeft extends BlockWithVariantsBase implements IMetaNam
 	// public static final AxisAlignedBB[][] RTBB = new AxisAlignedBB[][]
 	// { new AxisAlignedBB[]
 	// { new AxisAlignedBB(0.5, 0.0, 0.0, 0.1, 1, 1) } };
-
 	public ResearchTableLeft()
 	{
 		super("researchtable_left", Material.WOOD, false);
@@ -68,7 +72,7 @@ public class ResearchTableLeft extends BlockWithVariantsBase implements IMetaNam
 	public void registerModels()
 	{
 		for (EnumType et : ResearchTableLeft.EnumType.values())
-			Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), et.meta, "inventory", "researchtable_left_" + et.getName());
+			Arcania.proxy.registerItemRenderer(Item.getItemFromBlock(this), et.meta, "inventory", "researchtable_left_" + et.getName());
 	}
 
 	@Override
@@ -100,8 +104,7 @@ public class ResearchTableLeft extends BlockWithVariantsBase implements IMetaNam
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
 		TileEntityResearchTableLeft te = (TileEntityResearchTableLeft) worldIn.getTileEntity(pos);
-
-		if (te == null || te.facing == null)
+		if (te == null)
 			return state.withProperty(FACING, EnumFacing.NORTH);
 
 		return state.withProperty(FACING, te.facing);
@@ -206,22 +209,24 @@ public class ResearchTableLeft extends BlockWithVariantsBase implements IMetaNam
 		return false;
 	}
 
+	@Override
+	public boolean hasTileEntity()
+	{
+		return true;
+	}
+
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
-		// if (state.getValue(FACING) == EnumFacing.EAST) // USE WHEN MAKING HITBOXES
-		switch (state.getValue(FACING))
+		switch (state.getActualState(source, pos).getValue(FACING))
 		{
 			case EAST:
-				// return new AxisAlignedBB(0.0625, 0.75, 0.0, 1, 1, 1);
-				// return new AxisAlignedBB(0.25, 0.6875, 0.125, 1, 0.75, 0.875);
-				// return new AxisAlignedBB(0.25, 0.625, 0.1875, 1, 0.6875, 0.8125);
-				return new AxisAlignedBB(0.3125, 0.5625, 0.25, 0.6875, 0.625, 0.75);
+				return new AxisAlignedBB(0.0625, 0.5625, 0.0, 1, 1, 1);
 			case NORTH:
 				return new AxisAlignedBB(0.0, 0.5625, 0.0, 1, 1, 0.9375);
 			case SOUTH:
 				return new AxisAlignedBB(0.0, 0.5625, 0.0625, 1, 1, 1);
 			case WEST:
-				return new AxisAlignedBB(0.0, 0.6875, 0.125, 0.75, 0.75, 0.875);
+				return new AxisAlignedBB(0.0, 0.5625, 0.0, 0.9375, 1, 1);
 			default:
 				break;
 		}
@@ -233,7 +238,7 @@ public class ResearchTableLeft extends BlockWithVariantsBase implements IMetaNam
 	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, Entity entityIn, boolean isActualState)
 	{
 		// AABB = xyz 1 pixel = 0.0625
-		switch (state.getValue(FACING))
+		switch (getActualState(state, worldIn, pos).getValue(FACING))
 		{
 			case NORTH:
 				addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.0, 0.75, 0.0, 1, 1, 0.9375)); // Top
@@ -246,6 +251,8 @@ public class ResearchTableLeft extends BlockWithVariantsBase implements IMetaNam
 				addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.0625, 0.75, 0.0, 1, 1, 1));
 				addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.25, 0.6875, 0.125, 1, 0.75, 0.875));
 				addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.25, 0.625, 0.1875, 1, 0.6875, 0.8125));
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.3125, 0.5625, 0.25, 1, 0.625, 0.75));
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.0625, 0, 0.25, 0.3125, 0.75, 0.75));
 				break;
 			case SOUTH:
 				addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.0, 0.75, 0.0625, 1, 1, 1));
@@ -255,6 +262,11 @@ public class ResearchTableLeft extends BlockWithVariantsBase implements IMetaNam
 				addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.25, 0.0, 0.0625, 0.75, 1, 0.3125));
 				break;
 			case WEST:
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.0, 0.75, 0.0, 0.9375, 1, 1));
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.0, 0.6875, 0.125, 0.75, 0.75, 0.875));
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.0, 0.625, 0.1875, 0.75, 0.6875, 0.8125));
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.0, 0.5625, 0.25, 0.6875, 0.625, 0.75));
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.6875, 0, 0.25, 0.9375, 0.75, 0.75));
 				break;
 			default:
 				break;
@@ -311,49 +323,95 @@ public class ResearchTableLeft extends BlockWithVariantsBase implements IMetaNam
 	// }
 
 	@Override
-	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
 		EnumFacing facing = state.getValue(FACING);
-		((TileEntityResearchTableLeft) world.getTileEntity(pos)).setFacing(facing);
+		((TileEntityResearchTableLeft) worldIn.getTileEntity(pos)).setFacing(facing);
 
 		BlockPos rightpos = pos.add(facing.getDirectionVec());
 
-		if (canPlaceBlockAt(world, rightpos))
+		if (canPlaceBlockAt(worldIn, rightpos))
 		{
-			world.destroyBlock(rightpos, true);
-			world.setBlockState(rightpos, ModBlocks.RESEARCHTABLE_RIGHT.getStateFromMeta(((ResearchTableLeft.EnumType) state.getValue(VARIANT)).getMeta()));
-			((TileEntityResearchTableRight) world.getTileEntity(rightpos)).setFacing(facing.getOpposite());
+			worldIn.destroyBlock(rightpos, true);
+			worldIn.setBlockState(rightpos, ModBlocks.RESEARCHTABLE_RIGHT.getStateFromMeta(((ResearchTableLeft.EnumType) state.getValue(VARIANT)).getMeta()));
+			((TileEntityResearchTableRight) worldIn.getTileEntity(rightpos)).setFacing(facing.getOpposite());
 		}
+		else if (placer instanceof EntityPlayer)
+			worldIn.destroyBlock(pos, !((EntityPlayer)placer).isCreative());
 		else
-			world.destroyBlock(pos, true);
+			worldIn.destroyBlock(pos, true);
 
 	}
 
 	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state)
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
-		TileEntityResearchTableLeft te = (TileEntityResearchTableLeft) world.getTileEntity(pos);
+		TileEntityResearchTableLeft te = (TileEntityResearchTableLeft) worldIn.getTileEntity(pos);
+
+		if (!worldIn.isRemote)
+		{
+
+			if (te != null && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null))
+			{
+				for (int slot = 0; slot < te.inventory.getSlots(); slot++)
+					if (te.inventory.getStackInSlot(slot).getItem() != Items.AIR)
+						worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), te.inventory.getStackInSlot(slot)));
+			}
+		}
+
 		EnumFacing facing = te.facing;
 		BlockPos rightpos = pos.add(facing.getDirectionVec());
 
-		if (world.getBlockState(rightpos).getBlock() instanceof ResearchTableRight)
-			if (((TileEntityResearchTableRight) world.getTileEntity(rightpos)).facing == facing.getOpposite())
-				world.destroyBlock(rightpos, false);
+		if (worldIn.getBlockState(rightpos).getBlock() instanceof ResearchTableRight)
+			if (((TileEntityResearchTableRight) worldIn.getTileEntity(rightpos)).facing == facing.getOpposite())
+				worldIn.destroyBlock(rightpos, false);
 
-		super.breakBlock(world, pos, state);
+		super.breakBlock(worldIn, pos, state);
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		TileEntityResearchTableLeft te = (TileEntityResearchTableLeft) world.getTileEntity(pos);
+		TileEntityResearchTableLeft te = (TileEntityResearchTableLeft) worldIn.getTileEntity(pos);
 
-		if (te != null)
+		if (!worldIn.isRemote)
 		{
-			Minecraft.getMinecraft().displayGuiScreen(new ResearchTableGUI(state.getValue(VARIANT).name));
-			return true;
+			if (te != null)
+			{
+				// Minecraft.getMinecraft().displayGuiScreen(new ResearchTableGUI(state.getValue(VARIANT).name));
+				switch (state.getValue(VARIANT))
+				{
+					case ACACIA:
+						player.openGui(Arcania.instance, GUIHandler.RESEARCH_TABLE_ACACIA, worldIn, pos.getX(), pos.getY(), pos.getZ());
+						break;
+					case BIRCH:
+						player.openGui(Arcania.instance, GUIHandler.RESEARCH_TABLE_BIRCH, worldIn, pos.getX(), pos.getY(), pos.getZ());
+						break;
+					case DARKOAK:
+						player.openGui(Arcania.instance, GUIHandler.RESEARCH_TABLE_DARKOAK, worldIn, pos.getX(), pos.getY(), pos.getZ());
+						break;
+					case JUNGLE:
+						player.openGui(Arcania.instance, GUIHandler.RESEARCH_TABLE_JUNGLE, worldIn, pos.getX(), pos.getY(), pos.getZ());
+						break;
+					case OAK:
+						player.openGui(Arcania.instance, GUIHandler.RESEARCH_TABLE_OAK, worldIn, pos.getX(), pos.getY(), pos.getZ());
+						break;
+					case SPRUCE:
+						player.openGui(Arcania.instance, GUIHandler.RESEARCH_TABLE_SPRUCE, worldIn, pos.getX(), pos.getY(), pos.getZ());
+						break;
+					default:
+						break;
+
+				}
+				return true;
+			}
 		}
+		else
+			return true;
+
 		return false;
 	}
 
+	
+	
 }

@@ -1,6 +1,6 @@
 package com.charzard.arcania.blocks.blocks.pedestal;
 
-import com.charzard.arcania.Main;
+import com.charzard.arcania.Arcania;
 import com.charzard.arcania.blocks.BlockWithVariantsBase;
 import com.charzard.arcania.util.IMetaName;
 
@@ -48,7 +48,7 @@ public class Pedestal extends BlockWithVariantsBase implements IMetaName, ITileE
 	public void registerModels()
 	{
 		for (EnumType et : Pedestal.EnumType.values())
-			Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), et.meta, "inventory", "pedestal_" + et.getName());
+			Arcania.proxy.registerItemRenderer(Item.getItemFromBlock(this), et.meta, "inventory", "pedestal_" + et.getName());
 	}
 
 	@Override

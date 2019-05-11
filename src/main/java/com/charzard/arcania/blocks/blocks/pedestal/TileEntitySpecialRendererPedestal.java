@@ -24,14 +24,16 @@ public class TileEntitySpecialRendererPedestal extends TileEntitySpecialRenderer
 	{
 		super.render(te, x, y, z, partialTicks, destroyStage, alpha);
 
-		EntityItem entityitem = new EntityItem(te.getWorld(), te.getPos().getX(), te.getPos().getY(), te.getPos().getZ(),
-				te.inventory.getStackInSlot(0));
+		if (te.inventory.getStackInSlot(0).getItem() == Items.AIR)
+			return;
+
+		EntityItem entityitem = new EntityItem(te.getWorld(), te.getPos().getX(), te.getPos().getY(), te.getPos().getZ(), te.inventory.getStackInSlot(0));
 
 		GlStateManager.pushMatrix();
 		{
 			long j = te.getWorld().getTotalWorldTime();
 			entityitem.hoverStart = 0;
-			GlStateManager.translate((float) x + 0.5F, (float) y, (float) z + 0.5F);
+			GlStateManager.translate((float) x + 0.5F, (float) y + 0.1 + (0.03 * Math.sin(0.1 * j)), (float) z + 0.5F);
 			float speed = 2;
 			GlStateManager.rotate(j * speed, 0, 1, 0);
 			GlStateManager.translate(0, 1, 0);

@@ -1,6 +1,6 @@
 package com.charzard.arcania.blocks;
 
-import com.charzard.arcania.Main;
+import com.charzard.arcania.Arcania;
 import com.charzard.arcania.items.ModItems;
 import com.charzard.arcania.util.IHasModel;
 
@@ -32,7 +32,7 @@ public class BlockBase extends Block implements IHasModel {
 	public void registerModels()
 	{
 		if (!noItem)
-			Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
+			Arcania.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
 	}
 
 }

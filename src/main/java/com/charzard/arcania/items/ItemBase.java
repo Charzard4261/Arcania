@@ -1,6 +1,6 @@
 package com.charzard.arcania.items;
 
-import com.charzard.arcania.Main;
+import com.charzard.arcania.Arcania;
 import com.charzard.arcania.util.IHasModel;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -20,7 +20,7 @@ public class ItemBase extends Item implements IHasModel {
 	@Override
 	public void registerModels()
 	{
-		Main.proxy.registerItemRenderer(this, 0, "inventory");
+		Arcania.proxy.registerItemRenderer(this, 0, "inventory");
 	}
 
 }
